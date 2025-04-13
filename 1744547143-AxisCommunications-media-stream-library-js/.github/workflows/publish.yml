@@ -1,0 +1,47 @@
+# Publishes a GitHub release and NPM package for the provided package.
+# Tags are generated automatically on release.
+# The release/publish steps can be skipped (in case of a re-release attempt).
+name: Publish
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: extractions/setup-just@v1
+      - uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: yarn
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Build
+        env:
+          CYPRESS_INSTALL_BINARY: 0
+        run: |
+          just install
+          just build
+
+      - name: Upload assets
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload ${{ github.ref_name }} *.min.js*
+
+      - name: Deploy to NPM registry
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: |
+          yarn version -i ${{ github.ref_name }}
+          if [[ "${{ github.ref_name }}" =~ alpha|beta ]]; then
+              yarn npm publish --tag next
+          else
+              yarn npm publish --tag latest
+          fi

@@ -1,0 +1,41 @@
+# Logs
+*.log
+
+# Build/Test
+*.min.js*
+build/
+coverage/
+dist/
+*.tsbuildinfo
+
+# Cypress
+cypress/videos/
+cypress/screenshots/
+
+# IDE
+.idea/
+.vscode/
+.vim/
+
+# dependency management
+node_modules/
+vendor/
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Linting
+.eslintcache
+
+# Mac
+.DS_Store
+
+# Python
+__pycache__/
+
+# GitHub
+!.github/

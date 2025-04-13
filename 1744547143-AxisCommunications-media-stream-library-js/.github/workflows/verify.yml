@@ -1,0 +1,107 @@
+# Run linting, unit tests, check build is possible.
+# Standard requirements that should always be green.
+# Tested on NodeJS LTS and current stable.
+name: Verify
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  merge_group:
+
+jobs:
+  node:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: ['20', '22', '23']
+    steps:
+      - uses: extractions/setup-just@v1
+      - uses: actions/checkout@v4
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
+      - name: Install dependencies
+        run: just install
+      - name: Check
+        run: just ci
+
+  chrome:
+    runs-on: ubuntu-latest
+    services:
+      gstreamer:
+        image: steabert/gst-rtsp-launch
+        ports:
+          - 8554:8554
+    steps:
+      - uses: extractions/setup-just@v1
+      - uses: actions/checkout@v4
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: yarn
+      - name: Install dependencies
+        run: just install
+      - name: Build
+        run: just build
+      - name: Test basic video functionality
+        run: scripts/ci-video-test.sh chrome
+      - name: Archive logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs
+          path: |
+            tcp-ws-proxy.log
+            http-server.log
+
+  firefox:
+    runs-on: ubuntu-latest
+    services:
+      gstreamer:
+        image: steabert/gst-rtsp-launch
+        ports:
+          - 8554:8554
+    steps:
+      - uses: extractions/setup-just@v1
+      - uses: actions/checkout@v4
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: yarn
+      - name: Install dependencies
+        run: just install
+      - name: Build
+        run: just build
+      - name: Test basic video functionality
+        run: scripts/ci-video-test.sh firefox
+
+  edge:
+    runs-on: ubuntu-latest
+    services:
+      gstreamer:
+        image: steabert/gst-rtsp-launch
+        ports:
+          - 8554:8554
+    steps:
+      - uses: extractions/setup-just@v1
+      - uses: actions/checkout@v4
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: yarn
+      - name: Install dependencies
+        run: just install
+      - name: Build
+        run: just build
+      - name: Test basic video functionality
+        run: scripts/ci-video-test.sh edge

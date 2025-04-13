@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Example streaming MP4 video from Axis camera</title>
+</head>
+
+<body>
+  <div>
+    <div>
+      <label for="device">Device IP:</label>
+      <input id="device" type="text" placeholder="192.168.0.90" />
+    </div>
+    <button id="play">Play</button>
+    <button id="startCapture">Start capture</button>
+    <button id="stopCapture">Stop capture</button>
+  </div>
+  <div>
+    <video style="width: 100%; max-width: 1280px" autoplay muted controls></video>
+  </div>
+  <script type="module" src="simple-mp4-player.js"></script>
+</body>
+
+</html>
