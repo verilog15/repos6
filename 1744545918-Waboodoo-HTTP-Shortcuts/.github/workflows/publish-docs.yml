@@ -1,0 +1,25 @@
+name: Publish Documentation
+on:
+  push:
+    branches: [ overlord ]
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: setup python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
+    - name: Process files
+      run: |
+        python scripts/publish-docs.py
+    - name: Upload FTP
+      uses: sebastianpopp/ftp-action@releases/v2
+      with:
+        host: ${{ secrets.FTP_SERVER }}
+        user: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        localDir: "processed-docs"
+        remoteDir: "."
