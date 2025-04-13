@@ -1,0 +1,36 @@
+.idea
+/goreleaser
+/dist
+/target
+/tmp
+/out
+/bin
+*.bpf.o
+TODO.md
+minikube-*
+/data
+
+# Snap Packaging Artifacts
+*.snap
+snap/local/parca-agent
+snap/local/metadata.json
+
+# kernel test stuff
+kerneltest/*.test
+kerneltest/initramfs.cpio
+kerneltest/logs/vm_log_*.txt
+kerneltest/kernels/linux-*.bz
+kerneltest/ci-kernels
+
+# direnv / Nix
+.direnv
+.envrc
+result*
+
+# debug logs
+*.log
+*.plan
+*.token
+
+# java
+*.class
