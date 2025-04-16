@@ -1,0 +1,5 @@
+# Feel free to correct anything in this file
+
+Lint/UselessAccessModifier:
+  Exclude:
+    - 'lib/chef_zero/chef_data/acl_path.rb'

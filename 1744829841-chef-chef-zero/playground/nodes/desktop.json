@@ -1,0 +1,7 @@
+{
+  "name": "desktop",
+  "chef_type": "node",
+  "json_class": "Chef::Node",
+  "chef_environment": "staging",
+  "run_list": []
+}
