@@ -1,0 +1,311 @@
+body {
+  overflow: hidden;
+}
+
+a {
+  color: var(--joy-palette-primary-400);
+}
+
+.showOnChatBubbleHover {
+  display: none;
+}
+
+.chatBubble:hover .showOnChatBubbleHover {
+  display: inline-block;
+}
+
+.chatBubble:hover .chatBubbleContent {
+  filter: opacity(0.9);
+}
+
+.chatBubbleContent pre {
+  text-wrap: wrap;
+}
+
+.chatB .hoverIcon {
+  opacity: 0.5;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.chatBubbleThinking {
+  background-color: var(--joy-palette-warning-softBg);
+  font-size: 14px;
+  color: var(--joy-palette-text-tertiary);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0;
+}
+
+.chatBubbleThinking p {
+  margin: 5px;
+}
+
+.hoverIcon:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+td {
+  overflow: hidden;
+}
+
+.uppy-StatusBar-actionBtn {
+  background-color: var(--joy-palette-primary-600) !important;
+  color: var(--joy-palette-primary-100) !important;
+  float: right;
+  margin-left: auto;
+}
+
+button.hoverEditButton {
+  display: none;
+}
+
+.editableSheet:hover .editableSheetContent {
+  opacity: 0.3;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.editableSheet:hover button.hoverEditButton {
+  display: inline-flex;
+  opacity: 1;
+}
+
+/* Make sure that if you have clickable things
+  in the header, they themselves are not draggable
+  otherwise you can't click on them */
+.header button {
+  --webkit-app-region: no-drag;
+  app-region: no-drag;
+}
+
+.MuiModal-backdrop {
+  --webkit-app-region: drag;
+  app-region: drag;
+}
+
+.MuiModalDialog-root {
+  --webkit-app-region: no-drag;
+  app-region: no-drag;
+}
+
+/* This is an unused style for a cool
+spinning gradient border effect */
+/*
+.spin-border {
+  --angle: 0deg;
+  border: 2px solid;
+  border-image: conic-gradient(
+      from var(--angle),
+      #d600ff,
+      #00ff9f,
+      #00b8ff,
+      #001eff,
+      #bd00ff
+    )
+    1;
+  animation: 3s rotate infinite alternate linear;
+}
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+*/
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 10px;
+  /* for vertical scrollbars */
+  height: 10px;
+  /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* End Scrollbar styles */
+
+/* remove borders on button groups -- fixes up sidebar buttons at bottom */
+.MuiButtonGroup-root a,
+.MuiButtonGroup-root button {
+  border: none !important;
+}
+
+.MuiSheet-root.Sidebar {
+  background-color: rgb(214, 207, 225, 1.0),
+}
+
+html[data-joy-color-scheme='dark'] .MuiSheet-root.Sidebar {
+  background-color: rgb(54, 50, 59),
+}
+
+/* Color for sidebar disabled text */
+.FirstSidebar_Content .Mui-disabled {
+  color: rgb(77, 64, 75) !important;
+}
+
+html[data-joy-color-scheme='dark'] .FirstSidebar_Content .Mui-disabled {
+  color: rgb(157, 147, 155) !important;
+}
+
+/* Color for sidebar icons */
+.FirstSidebar_Content .Mui-disabled .MuiListItemDecorator-root {
+  color: rgb(156, 144, 144) !important;
+}
+
+/* Make the Select Experiment menu look nice in dark and light */
+html[data-joy-color-scheme='light'] .select-experiment-menu {
+  background-color: rgb(202, 195, 212);
+}
+
+html[data-joy-color-scheme='dark'] .select-experiment-menu {
+  background-color: rgb(111, 106, 117);
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
+  border: none;
+}
+
+/* This will highlight errors where a div is a child of a p which is
+not allowed */
+/* p > div {
+  border: 10px solid red;
+} */
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+}
+
+.chatBubbleContent code {
+  display: block;
+  max-width: 300px;
+}
+
+
+textarea {
+  background-color: var(--joy-palette-background-level1);
+  border: 1px solid rgb(209, 213, 219);
+  color: var(--joy-palette-text-tertiary);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI";
+  font-size: 16px;
+  padding: 16px;
+}
+
+.xterm-viewport::-webkit-scrollbar {
+  background-color: var(--joy-palette-background-level1);
+}
+
+.xterm-viewport::-webkit-scrollbar-thumb {
+  background: var(--joy-palette-primary-400);
+}
+
+.dynamic-plugin-form select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0 30px 0 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  line-height: 1.5rem;
+  height: 2rem;
+  background: #fff;
+  min-width: 200px;
+  margin: 0 5px 5px 0;
+  font-size: 14px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+
+/* React flow asks us not to hide attribution but it is
+MIT licensed so we have the right to modify the source
+code if we want */
+.react-flow__attribution a {
+  display: none;
+}
+
+.react-flow__node {
+  /* box-shadow: var(--xy-node-boxshadow-default);
+  border-radius: var(--xy-node-border-radius-default);
+  background-color: var(--xy-node-background-color-default); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  font-size: 12px;
+  flex-direction: column;
+  /* border: var(--xy-node-border-default);
+  color: var(--xy-node-color, var(--xy-node-color-default)); */
+  /* overflow: hidden; */
+  word-break: break-all;
+  background-color: var(--joy-palette-background-level1);
+  max-width: 800px;
+}
+
+.react-flow__node-customNode {
+  padding: 0px;
+  border-radius: var(--xy-node-border-radius, var(--xy-node-border-radius-default));
+  font-size: 12px;
+  min-width: 200px;
+  color: var(--xy-node-color, var(--xy-node-color-default));
+  text-align: center;
+  border: var(--xy-node-border, var(--xy-node-border-default));
+}
+
+.react-flow__node-startNode {
+  border: 2px solid var(--joy-palette-primary-plainColor);
+  background-color: var(--joy-palette-primary-softBg);
+  border-radius: 20px;
+  width: 80px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+path.react-flow__edge-path {
+  stroke-width: 2;
+}
+
+.custom-node-delete-button {
+  opacity: 0.0;
+}
+
+.react-flow__node-customNode:hover .custom-node-delete-button {
+  opacity: 1.0;
+  transition: opacity 0.2s ease-in-out;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1.5px solid rgb(156, 144, 144);
+  height: 14px;
+  width: 14px;
+  top: -5px;
+  right: -5px;
+  padding-left: 0.5px;
+  cursor: 'pointer';
+  display: flex;
+  border-radius: '50%';
+  justify-content: center;
+  align-items: center;
+  color: var(--joy-palette-primary-400);
+  border-color: var(--joy-palette-primary-400),
+}
+
+.react-flow__node-customNode:hover {
+  /* add a light shadow effect */
+  box-shadow: 0 0 10px var(--joy-palette-primary-400);
+  transition: box-shadow 0.2s ease-in-out;
+}
