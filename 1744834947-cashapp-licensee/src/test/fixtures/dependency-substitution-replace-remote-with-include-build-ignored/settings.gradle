@@ -1,0 +1,13 @@
+pluginManagement {
+  includeBuild("../../test-build-logic")
+}
+
+plugins {
+  id("licenseeTests")
+}
+
+includeBuild('other') {
+  dependencySubstitution {
+    substitute module('com.example:example') using project(':')
+  }
+}

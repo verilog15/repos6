@@ -1,0 +1,25 @@
+plugins {
+  alias(libs.plugins.android.application)
+  alias(libs.plugins.licensee)
+}
+
+dependencies {
+  implementation project(':other')
+}
+
+licensee {
+  allow('Apache-2.0')
+}
+
+android {
+  compileSdk 33
+  namespace 'com.example'
+
+  defaultConfig {
+    minSdk 21
+  }
+
+  lintOptions {
+    checkReleaseBuilds false
+  }
+}

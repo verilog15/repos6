@@ -1,0 +1,8 @@
+plugins {
+  id("java")
+  alias(libs.plugins.licensee)
+}
+
+dependencies {
+  implementation project(':other')
+}

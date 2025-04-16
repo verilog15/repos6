@@ -1,0 +1,14 @@
+plugins {
+  id("java-library")
+  alias(libs.plugins.licensee)
+}
+
+dependencies {
+  implementation('com.example:example-a:1.0.0') {
+    exclude group: 'com.example', module: 'example-b'
+  }
+}
+
+licensee {
+  allow('Apache-2.0')
+}

@@ -1,0 +1,36 @@
+plugins {
+  alias(libs.plugins.android.dynamicFeature)
+  alias(libs.plugins.licensee)
+}
+
+dependencies {
+  implementation project(':app')
+  implementation 'com.example:example:1.0.0'
+}
+
+licensee {
+  allow('Apache-2.0')
+}
+
+
+
+android {
+  compileSdk 33
+  namespace 'com.example.feature'
+
+  defaultConfig {
+    minSdk 21
+  }
+
+  flavorDimensions 'price', 'store'
+  productFlavors {
+    free { dimension 'price' }
+    paid { dimension 'price' }
+    google { dimension 'store' }
+    amazon { dimension 'store' }
+  }
+
+  lintOptions {
+    checkReleaseBuilds false
+  }
+}

@@ -1,0 +1,16 @@
+plugins {
+  id("java-library")
+  alias(libs.plugins.licensee)
+}
+
+dependencies {
+  implementation 'com.example:example:1.0.0'
+}
+
+
+
+licensee {
+  // http://scripts.sil.org/cms/scripts/page.php?item_id=OFL_web maps to OFL-1.1, OFL-1.1-no-RFN, and OFL-1.1-RFN
+  // https://github.com/cashapp/licensee/issues/28
+  allow("OFL-1.1-RFN")
+}

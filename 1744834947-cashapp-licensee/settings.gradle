@@ -1,0 +1,14 @@
+pluginManagement {
+  includeBuild("gradle/build-logic")
+  repositories {
+    mavenCentral()
+    google()
+    gradlePluginPortal()
+  }
+}
+
+plugins {
+  id "app.cash.licensee.repos"
+}
+
+rootProject.name = 'licensee'

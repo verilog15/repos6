@@ -1,0 +1,16 @@
+plugins {
+  alias(libs.plugins.android.library)
+}
+
+dependencies {
+  api 'com.example:example:1.0.0'
+}
+
+android {
+  compileSdk 33
+  namespace 'com.other'
+
+  defaultConfig {
+    minSdk 21
+  }
+}

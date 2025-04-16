@@ -1,0 +1,14 @@
+plugins {
+  id("java-library")
+  alias(libs.plugins.licensee)
+}
+
+dependencies {
+  implementation name: 'example-1.0.0', ext: 'jar'
+}
+
+repositories {
+  flatDir {
+    dirs 'repo'
+  }
+}

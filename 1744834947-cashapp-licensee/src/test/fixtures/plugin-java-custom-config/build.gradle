@@ -1,0 +1,19 @@
+plugins {
+  id("java")
+  alias(libs.plugins.licensee)
+}
+
+configurations.create("foo")
+
+dependencies {
+  foo 'com.example:example:1.0.0'
+}
+
+licensee {
+  allow('Apache-2.0')
+}
+
+tasks.register("licenseeFoo", app.cash.licensee.LicenseeTask) {
+  configurationToCheck configurations.foo
+  outputDir.set(layout.buildDirectory.dir("reports/licenseeFoo"))
+}

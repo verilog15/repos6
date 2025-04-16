@@ -1,0 +1,9 @@
+subprojects {
+  configurations.configureEach {
+    resolutionStrategy {
+      dependencySubstitution {
+        substitute project(':other') using module('com.example:example:1.0.0')
+      }
+    }
+  }
+}
