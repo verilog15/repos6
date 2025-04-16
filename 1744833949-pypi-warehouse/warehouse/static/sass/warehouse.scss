@@ -1,0 +1,357 @@
+/*!
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@charset "utf-8";
+
+// WAREHOUSE
+
+/*
+  This is the primary import file for the CSS for the Warehouse project (PyPI).
+  This project uses a variation of the ITCSS system to control CSS inheritance.
+  The basic idea is that you should define CSS rules in an order moving
+  from generic to specific. This is done so we avoid rules overwriting rules
+  overwriting rules overwriting... you get the picture.
+  Imports are organised into the seven layers defined below:
+*/
+
+// TOOLS LAYER: libraries and mixins
+@import "tools/design-utilities";
+@import "tools/layout-utilities";
+@import "tools/link-utilities";
+@import "tools/typography";
+
+// SETTINGS LAYER: settings we use throughout the codebase
+@import "settings/breakpoints";
+@import "settings/colours";
+@import "settings/fonts";
+@import "settings/grid";
+@import "settings/z-index";
+
+// RESETS LAYER: applies CSS resets and sensible defaults
+@import "resets/boxsizing";
+@import "~normalize.css/normalize";
+@import "resets/reset";
+
+// BASE LAYER: adds styles to anything without a class
+@import "base/images-figures";
+@import "base/forms";
+@import "base/lists";
+@import "base/tables";
+@import "base/typography";
+
+// LAYOUT HELPERS LAYER: reusable layout helpers
+@import "layout-helpers/banner";
+@import "layout-helpers/columns";
+@import "layout-helpers/containers";
+@import "layout-helpers/left-layout";
+@import "layout-helpers/split-layout";
+@import "layout-helpers/stick-to-top";
+
+// blocks LAYER: some warehouse specific, some generic/reusable
+@import "blocks/about-pypi";
+@import "blocks/accordion";
+@import "blocks/admin-include";
+@import "blocks/applied-filters";
+@import "blocks/author-profile";
+@import "blocks/badge";
+@import "blocks/breadcrumbs";
+@import "blocks/button";
+@import "blocks/button-group";
+@import "blocks/callout-block";
+@import "blocks/centered-heading";
+@import "blocks/checkbox-tree";
+/*rtl:begin:ignore*/
+@import "blocks/code-block";
+/*rtl:end:ignore*/
+@import "blocks/copy-tooltip";
+@import "blocks/dark-overlay";
+@import "blocks/dropdown";
+@import "blocks/faq-group";
+@import "blocks/filter-badge";
+@import "blocks/filter-panel";
+@import "blocks/footer";
+@import "blocks/form-errors";
+@import "blocks/form-group";
+@import "blocks/gravatar-form";
+@import "blocks/heading-wsubtitle";
+@import "blocks/homepage-banner";
+@import "blocks/hooray-list";
+@import "blocks/horizontal-menu";
+@import "blocks/horizontal-section";
+@import "blocks/language-switcher";
+@import "blocks/large-input";
+@import "blocks/lede-paragraph";
+@import "blocks/mobile-search-bar";
+@import "blocks/modal";
+@import "blocks/notification-bar";
+@import "blocks/org-roles";
+/*rtl:begin:ignore*/
+@import "blocks/organization-snippet";
+@import "blocks/package-description";
+@import "blocks/package-header";
+@import "blocks/package-snippet";
+/*rtl:end:ignore*/
+@import "blocks/password-strength";
+/*rtl:begin:ignore*/
+@import "blocks/project-description";
+/*rtl:end:ignore*/
+@import "blocks/files";
+@import "blocks/radio-toggle-form";
+@import "blocks/release";
+@import "blocks/release-timeline";
+@import "blocks/search-form";
+@import "blocks/sidebar-section";
+@import "blocks/site-header";
+@import "blocks/skip-to-content";
+@import "blocks/sponsor-grid";
+@import "blocks/sponsor-packages";
+@import "blocks/sponsors";
+@import "blocks/sponsorship-benefits";
+@import "blocks/sponsorship-intro";
+/*rtl:begin:ignore*/
+@import "blocks/status-badge";
+/*rtl:end:ignore*/
+@import "blocks/statistics-bar";
+@import "blocks/table";
+/*rtl:begin:ignore*/
+@import "blocks/team-snippet";
+/*rtl:end:ignore*/
+@import "blocks/totp-form";
+@import "blocks/twofa-login";
+@import "blocks/horizontal-tabs";
+@import "blocks/vertical-tabs";
+@import "blocks/verified";
+@import "blocks/viewport-section";
+@import "blocks/copyable";
+
+// TRUMPS LAYER: Overwrites everything else
+
+// RESETS
+// Remove all styling from lists
+.unstyled {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+// Reset text to default
+.reset-text {
+  font-size: $base-font-size;
+  font-weight: normal;
+}
+
+// TYPE
+.break {
+  word-break: break-all;
+}
+
+.public-email {
+  display: inline-block;
+  max-width: 85%;
+  overflow: hidden;
+  position: relative;
+  text-overflow: ellipsis;
+  top: 3px;
+  white-space: nowrap;
+
+  &::after {
+    content: none !important;
+  }
+}
+
+// COLORS
+// Make text or icons red to draw attention
+.danger {
+  color: $danger-color;
+}
+
+// ALIGNMENT, PADDING & MARGINS
+// Make inline elements centered
+.centered {
+  text-align: center;
+}
+
+// Remove top padding on selected typography elements
+.no-top-padding {
+  padding-top: 0;
+}
+
+// Remove bottom padding on selected typography elements
+.no-bottom-padding {
+  padding-bottom: 0;
+}
+
+// Remove top margin on selected blocks
+.no-top-margin {
+  margin-top: 0;
+}
+
+// Remove bottom margin on selected blocks
+.no-bottom-margin {
+  margin-bottom: 0;
+}
+
+// Remove left margin on selected blocks
+.no-left-margin {
+  margin-left: 0;
+}
+
+// Add small margin to the top of elements
+.margin-top {
+  margin-top: $quarter-spacing-unit;
+}
+
+// Add larger margin to the top of elements
+.margin-top--large {
+  margin-top: $half-spacing-unit;
+}
+
+// Add small margin to the bottom of elements
+.margin-bottom {
+  margin-bottom: $quarter-spacing-unit;
+}
+
+// Add larger margin to the bottom of elements
+.margin-bottom--large {
+  margin-bottom: $half-spacing-unit;
+}
+
+// Add small margin to the left of elements
+.margin-left {
+  margin-left: $quarter-spacing-unit;
+}
+
+// Add larger margin to the left of elements
+.margin-left--large {
+  margin-left: $half-spacing-unit;
+}
+
+// Add small margin to the right of elements
+.margin-right {
+  margin-right: $quarter-spacing-unit;
+}
+
+// Add larger margin to the right of elements
+.margin-right--large {
+  margin-right: $half-spacing-unit;
+}
+
+// Apply spacing between elements when they wrap (usually on mobile)
+.wrap-children {
+  margin-bottom: -5px;
+
+  > * {
+    margin-bottom: 5px;
+  }
+}
+
+// TITLES
+// Adjust size of h1s on standalone pages
+.page-title {
+  @include h1-title;
+}
+
+// Resolve conflict between .page-title and .heading-wsubtitle
+.page-title--wsubtitle {
+  padding-bottom: 5px;
+}
+
+// Add extra padding to subtitles
+.sub-title {
+  padding-bottom: 25px;
+}
+
+// VISIBILITY
+.hidden,
+.confirm-form {
+  display: none;
+}
+
+.display-block {
+  display: block;
+}
+
+// Desktop specific visibility
+@media screen and (min-width: $desktop + 1px) {
+  .hide-on-desktop {
+    display: none;
+  }
+}
+
+@media screen and (max-width: $desktop) {
+  .hide-below-desktop {
+    display: none;
+  }
+}
+
+// Tablet specific visibility
+@media screen and (max-width: $tablet) {
+  .hide-on-tablet {
+    display: none;
+  }
+
+  .show-on-tablet {
+    display: block;
+  }
+}
+
+// RTL SUPPORT. See https://rtlcss.com/
+/*rtl:begin:ignore*/
+// fix padding on split layouts
+html[dir="rtl"] .package-snippet .split-layout > :first-child,
+html[dir="rtl"] .package-description.split-layout > :first-child {
+  padding-left: 0;
+  padding-right: $spacing-unit;
+}
+
+// Force humanized time to display ltr
+// Remove when/if this is marked for translation
+time {
+  direction: ltr;
+}
+
+// force email select to display ltr
+// Remove when/if this is marked for translation
+#public_email { // stylelint-disable-line selector-id-pattern -- remove when translated
+  direction: ltr;
+}
+
+// force form errors to display ltr
+// Remove when/if these are marked for translation
+.form-errors {
+  text-align: left;
+}
+/*rtl:end:ignore*/
+
+// ACCESSIBILITY
+
+/*
+  Apply this class to anything you want to hide visually, but that you want
+  screen readers to be able to read. Great for extra labels, etc.
+*/
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+// Class for unstyled lists
+.no-bullets {
+  list-style-type: none;
+}

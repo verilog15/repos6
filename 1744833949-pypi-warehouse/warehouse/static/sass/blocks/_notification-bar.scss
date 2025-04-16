@@ -1,0 +1,165 @@
+/*!
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+  A full width horizontal div that contains a short notification.
+  Use for single lines only, as all content will be styled as a h3.
+
+  Can be nested inside the .stick-to-top helper to stick to the top of the page.
+
+  <div class="notification-bar">
+    <span class="notification-bar__icon">
+      <i class="icon-classes" aria-hidden="true"></i>
+      <span class="sr-only">Icon label:</span>
+    </span>
+    <span class="notification-bar__message">
+      // A one line notification goes here.
+    </span>
+  </div>
+
+  Modifiers:
+    - danger: Applies a red background
+    - warning: Applies a yellow background
+    - success: Applies a green background
+    - dismissable: Indicates notification can be dismissed. Defaults to hidden.
+    - visible: Indicates a visible, non-dismissed notification
+
+  Accessibility:
+  Roles should be added to danger, warning and success notifications to help
+  users using screen readers:
+
+  - danger: Add role="alert". Use with care - as this will interrupt the
+    standard screen reader workflow
+  - warning: Add role="status"
+  - success: Add role="status"
+
+  Icons should also be added to danger, warning and success notifications, to
+  ensure that color is not the only way of conveying the status of the
+  notification. This is important for color blind users.
+
+  Icons should be hidden with "aria-hidden=true" and given a screen reader
+  label, as per the HTML example above.
+
+   - danger: Add "fa fa-exclamation-triangle", sr-only="Error:"
+   - warning: Add "fa fa-exclamation-triangle", sr-only="Warning:"
+   - success: Add "fa fa-check", sr-only="Success:"
+
+  A notification bar can be made dismissable by adding the following to the main
+  notification-bar div:
+
+    - .notification-bar--dismissable to its classes
+    - data-controller="notification" as an attribute
+    - data-notification-target="notification" as an attribute
+    - a dismiss button (see html example below)
+
+  The data-controller and data-notification-target are used for handling visibility,
+  including adding .notification-bar--visible to notification-bar div if it has
+  not been dismissed (and persisted) yet.
+
+  <div class="notification-bar notification-bar--dismissable"
+    data-controller="notification" data-notification-target="notification">
+      <button
+       title="Dismiss this notification"
+       data-notification-target="dismissButton"
+       data-action="click->notification#dismiss"
+       class="notification-bar__dismiss"
+       aria-label="close">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+      <span class="notification-bar__icon">
+        // icon here
+      </span>
+      <span class="notification-bar__message">
+        // A one line notification goes here.
+      </span>
+  </div>
+
+  Note that if JavaScript is disabled, the notification bar always defaults to
+  be visible.
+*/
+
+.notification-bar {
+  border-bottom: 2px solid $white;
+  text-align: center;
+  background-color: $primary-color-dark;
+  color: $white;
+  padding: $half-spacing-unit;
+  position: relative;
+
+  &__icon {
+    font-size: $small-font-size;
+    margin-right: 3px;
+  }
+
+  &__message {
+    @include h3;
+
+    a:not(.button) {
+      @include white-underlined-link;
+    }
+  }
+
+  &__dismiss {
+    @include dismiss-button;
+    @include link-focus-state(inherit);
+    color: inherit;
+  }
+
+  // Indicates that a notification is dismissable.
+  // Since this defaults to not displaying the element, one must make sure the
+  // notification controller is being used.
+  &--dismissable {
+    display: none;
+    padding: 15px 55px;
+  }
+
+  &--visible {
+    display: block;
+  }
+
+  &--warning {
+    background-color: $warning-background-color;
+    color: $warning-color;
+
+    a:not(.button) {
+      @include colored-link($warning-color);
+    }
+
+    .notification-bar__dismiss {
+      @include link-focus-state($warning-color);
+    }
+  }
+
+  &--danger {
+    background-color: $danger-color;
+  }
+
+  &--success {
+    background-color: $success-color;
+  }
+
+  &--banner {
+    background-color: $warning-background-color;
+    color: $warning-color;
+    border-color: darken($primary-color, 10);
+
+    a {
+      color: $warning-color;
+    }
+
+    .button {
+      color: $white;
+    }
+  }
+}

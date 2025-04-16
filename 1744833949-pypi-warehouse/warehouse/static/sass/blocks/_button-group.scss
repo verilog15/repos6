@@ -1,0 +1,63 @@
+/*!
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+  A button group.  The seclected button can be specified by adding a
+  --dark or --primary modifier to the button.
+
+  <div class="button-group">
+    <a class="button-group__button">First Button</a>
+    <a class="button-group__button">Second Button</a>
+  </div>
+
+  Modifiers:
+   - pagination: adds top margin for pagination button groups
+*/
+
+.button-group {
+  display: block;
+
+  &::after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+
+  &__button {
+    float: left;
+    border-radius: 0;
+  }
+
+  .button-group__button + .button-group__button {
+    margin-left: -1px;
+  }
+
+  &__button:first-child {
+    border-radius: 3px 0 0 3px;
+  }
+
+  &__button:last-child {
+    border-radius: 0 3px 3px 0;
+  }
+
+  &--pagination {
+    margin-top: 40px;
+
+    @media only screen and (max-width: $tablet) {
+      .button-group__button:not(:first-child, :last-child) {
+        display: none; // Avoid button group's ugly wrapping on tablet / mobile
+      }
+    }
+  }
+}

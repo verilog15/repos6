@@ -1,0 +1,84 @@
+{#
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ #
+ # http://www.apache.org/licenses/LICENSE-2.0
+ #
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+-#}
+{% extends "admin/base.html" %}
+
+{% import "admin/utils/pagination.html" as pagination %}
+
+{% block title %}Releases for {{ project.name }}{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{{ request.route_path('admin.project.list') }}">Projects</a></li>
+  <li class="breadcrumb-item"><a href="{{ request.route_path('admin.project.detail', project_name=project.normalized_name) }}">{{ project.name }}</a></li>
+  <li class="breadcrumb-item active">Releases</li>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <form>
+      <div class="input-group input-group-lg">
+        <input name="q" type="text" class="form-control input-lg" placeholder="Search"{% if query %} value="{{ query }}"{% endif %}>
+        <div class="input-group-btn input-group-append">
+          <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body table-responsive p-0">
+    <table class="table table-hover table-striped">
+      <thead>
+      <tr>
+        <th>Release version</th>
+        <th>Created</th>
+        <th>Yanked</th>
+        <th>Uploader</th>
+        <th>Author email</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      {% for release in releases %}
+      <tr>
+        <td><a href="{{ request.route_path('admin.project.release', project_name=release.project.normalized_name, version=release.version) }}">{{ release.project.name }}-{{ release.version }}</a></td>
+        <td>{{ release.created }}</td>
+        <td>{{ release.yanked }}</td>
+        <td>
+          {% if release.uploader %}
+          <a href="{{ request.route_path('admin.user.detail', username=release.uploader.username) }}">{{ release.uploader.username }}</a>
+          {% endif %}
+        </td>
+        <td>{{ release.author_email }}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="card-footer row">
+      <div class="col-sm-5">
+          {{ pagination.summary(releases) }}
+      </div>
+
+      <div class="col-sm-7">
+        <div class="float-right">
+            {{ pagination.paginate(releases) }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock content %}

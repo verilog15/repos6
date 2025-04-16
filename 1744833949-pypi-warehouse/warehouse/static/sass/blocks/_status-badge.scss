@@ -1,0 +1,109 @@
+/*!
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+  A badge that provides package status information.
+  By default the badge is white with an info icon.
+
+  <a class="status-badge">
+    // Some status
+  </a>
+
+  Modifiers:
+    - unknown: Adds a question mark icon to the badge.
+    - warn: Adds an exclamation triangle. Makes it yellow.
+    - good: Adds a tick icon to the badge. Makes it green.
+    - bad: Adds a warning icon to the badge. Makes it red.
+
+*/
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 3px;
+  font-size: $small-font-size;
+  color: $text-color;
+  background-color: $white;
+  border: 1px solid rgb(255 255 255 / 50%);
+  padding: 0 12px 0 0;
+  text-align: left;
+  min-height: 40px;
+  @include link-without-underline;
+  @include link-focus-state($white);
+
+  span {
+    text-decoration: underline;
+  }
+
+  &:hover {
+    color: $text-color;
+  }
+
+  &::before {
+    content: "\f05a"; // Info icon
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    padding: 12px;
+    margin-right: 12px;
+    min-width: 40px;
+    min-height: 42px;
+    text-align: center;
+    border-right: 1px solid rgb(255 255 255 / 40%);
+  }
+
+  &--unknown {
+    &::before {
+      content: "\f059"; // Question mark
+    }
+  }
+
+  &--good {
+    color: $white;
+    background-color: $success-color;
+
+    &:hover {
+      color: $white;
+    }
+
+    &::before {
+      content: "\f00c"; // Check / Tick
+    }
+  }
+
+  &--warn {
+    background-color: $warning-background-color;
+
+    &:hover {
+      color: $white;
+    }
+
+    &::before {
+      content: "\f071"; // Warning
+    }
+  }
+
+  &--bad {
+    color: $white;
+    background-color: $danger-color;
+
+    &:hover {
+      color: $white;
+    }
+
+    &::before {
+      content: "\f071"; // Warning
+    }
+  }
+}

@@ -1,0 +1,102 @@
+/*!
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+  A horizontal search form, with an input on the left and a button on the right.
+
+  <form class="search-form" role="search">
+    <label for="my-search" class="sr-only">Search PyPI</label>
+    <input class="search-form__search" id="my-search">
+    <button type="submit" class="search-form__button">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <span class="sr-only">Search</span>
+    </button>
+  </form>
+
+  Modifiers:
+    - primary: Used on the primary site navigation
+    - large: large centered search bar
+    - fullwidth: Full width (used on mobile displays)
+*/
+
+.search-form {
+  position: relative;
+  max-width: 100%;
+
+  input[type="text"].search-form__search {
+    display: inline;
+    padding-right: 28px;
+    min-width: auto;
+    border-color: $white;
+  }
+
+  &__button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    min-height: 40px;
+    width: 40px;
+    border: 0;
+    background-color: transparent;
+    color: mix($text-color, $border-color, 50%);
+    font-size: 18px;
+  }
+
+  &--primary {
+    margin: 25px 0 0 40px;
+
+    @media screen and (max-width: $tablet) {
+      display: none;
+    }
+
+    input[type="text"].search-form__search {
+      width: 400px;
+
+      @media screen and (max-width: $desktop) {
+        width: 200px;
+      }
+    }
+  }
+
+  &--large {
+    width: 650px;
+    margin: 0 auto;
+    padding: 0 20px;
+
+    @media screen and (max-width: $mobile) {
+      padding: 0 5px;
+    }
+
+    input[type="text"].search-form__search {
+      padding-right: 50px;
+    }
+
+    .search-form__button {
+      min-height: 50px;
+      width: 50px;
+      font-size: 20px;
+      right: 20px;
+
+      @media screen and (max-width: $mobile) {
+        right: 5px;
+      }
+    }
+  }
+
+  &--fullwidth {
+    input[type="text"].search-form__search {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,95 @@
+/*!
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+  A menu where the links stack horizontally.
+
+  <nav class="horizontal-menu" aria-label="my label">
+    <ul>
+      <li class="horizontal-menu__item">
+        <a class="horizontal-menu__link">A horizontal link</a>
+      </li>
+    </ul>
+  </nav>
+
+  Accessibility:
+    - Describe the menu with aria-label
+
+  Modifiers:
+    - tall: Adds extra padding to the menu items
+    - light: Makes the links white. Use on a dark background.
+*/
+
+.horizontal-menu {
+  ul,
+  li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__item {
+    display: inline;
+  }
+
+  &__link {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 10px;
+    @include link-without-underline;
+    @include link-focus-state($white);
+
+    &--with-icon {
+      .fa {
+        margin-right: 3px;
+      }
+
+      .user-image {
+        margin-right: 5px;
+        border-radius: 10%;
+      }
+
+      &:hover {
+        .fa,
+        .user-image {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+
+  &--light {
+    .horizontal-menu__link {
+      color: $white;
+
+      &:hover {
+        text-decoration-color: $transparent-white;
+      }
+    }
+  }
+
+  &--tall {
+    .horizontal-menu__link {
+      padding: 32px $half-spacing-unit;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      @media only screen and (max-width: $small-tablet) {
+        padding: 25px 10px;
+      }
+    }
+  }
+}

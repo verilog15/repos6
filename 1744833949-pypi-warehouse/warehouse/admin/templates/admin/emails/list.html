@@ -1,0 +1,125 @@
+{#
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ #
+ # http://www.apache.org/licenses/LICENSE-2.0
+ #
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+-#}
+{% extends "admin/base.html" %}
+
+{% import "admin/utils/pagination.html" as pagination %}
+
+{% macro status_color(status) -%}
+  {%- if status.value == "Delivered" -%}
+    green
+  {%- elif status.value == "Soft Bounced" -%}
+    yellow
+  {%- elif status.value == "Bounced" -%}
+    red
+  {%- elif status.value == "Complained" -%}
+    red
+  {%- else -%}
+    muted
+  {%- endif -%}
+{%- endmacro %}
+
+{% block title %}Emails{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Emails</li>
+{% endblock %}
+
+{% block content %}
+{% if request.has_permission(Permissions.AdminEmailsWrite) %}
+<form method="POST" action={{ request.route_path('admin.emails.mass') }} enctype="multipart/form-data">
+  <input name="csrf_token" type="hidden" value="{{ request.session.get_csrf_token() }}">
+  <div class="card card-primary card-outline">
+    <div class="card-header">
+      <h3 class="card-title">Send mass emails</h3>
+    </div>
+    <div class="card-body">
+      <p>
+      Uploaded files should have the following header: <code>user_id,subject,body_text</code>, where <code>user_id</code> is a user's UUID, <code>subject</code> is the subject, and <code>body_text</code> is the plaintext message body.
+      </p>
+      <p>
+      Including <code>body_html</code> is also supported, but optional.
+      </p>
+      <input name="csvfile" type="file" class="form-control-file">
+    </div>
+    <div class="card-footer">
+      <div class="float-right">
+        <button type="submit" class="btn btn-primary">Send</button>
+      </div>
+    </div>
+  </div>
+</form>
+{% endif %}
+
+<div class="card card-primary card-outline">
+  <div class="card-header">
+    <h3 class="card-title">Search</h3>
+  </div>
+  <div class="card-body">
+    <form>
+      <div class="input-group input-group-lg">
+        <input name="q" type="text" class="form-control input-lg" placeholder="Search: supported terms are to: from: subject: status:"{% if query %} value="{{ query }}"{% endif %}>
+        <div class="input-group-btn input-group-append">
+          <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="card-body table-responsive p-0">
+    <table class="table table-hover table-striped ">
+      <thead>
+      <tr>
+        <th></th>
+        <th>Date</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Subject</th>
+        <th>Status</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      {% for email in emails %}
+      <tr>
+        <td>
+          <a href="{{ request.route_path('admin.emails.detail', email_id=email.id) }}">
+            <i class="fa fa-cog"></i>
+          </a>
+        </td>
+        <td>{{ email.created|format_datetime }}</td>
+        <td>{{ email.from_ }}</td>
+        <td>{{ email.to }}</td>
+        <td>{{ email.subject }}</td>
+        <td class="text-{{ status_color(email.status) }}">{{email.status.value }}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+
+    </table>
+  </div> <!-- /.card-body -->
+
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-sm-5">
+          {{ pagination.summary(emails) }}
+      </div>
+
+      <div class="col-sm-7">
+        <div class="float-right">
+            {{ pagination.paginate(emails) }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div> <!-- /.card -->
+{% endblock content %}

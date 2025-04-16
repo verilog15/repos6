@@ -1,0 +1,60 @@
+/*!
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+  A full width horizontal section that acts as a background container and
+  adds vertical rhythm to the page.
+
+  This block should not be used inside another container.
+
+  <div class="horizontal-section"></div>
+
+  Modifiers:
+    - grey: Makes the background color grey. Adds two grey borders as separators.
+    - medium: Reduces the standard padding
+    - thin: Dramatically reduces the standard padding
+    - statistics: Specific to the statistics bar on the homepage.
+*/
+
+.horizontal-section {
+  padding: 70px 0;
+
+  @media only screen and (max-width: $tablet) {
+    padding: 50px 0;
+  }
+
+  @media only screen and (max-width: $mobile) {
+    padding: 40px 0;
+  }
+
+  &--grey {
+    background-color: $base-grey;
+    border-bottom: 1px solid darken($base-grey, 10);
+    border-top: 1px solid darken($base-grey, 10);
+  }
+
+  &--medium {
+    padding: 40px 0;
+  }
+
+  &--thin {
+    padding: 10px 0;
+  }
+
+  &--statistics {
+    @media only screen and (max-width: $mobile) {
+      display: none;
+    }
+  }
+}

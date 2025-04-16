@@ -1,0 +1,192 @@
+/*!
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+  Tabs that are not navigation. Used to display a vertical list of links:
+
+  <div class="vertical-tabs">
+    <div class="vertical-tabs__tabs">
+      <ul class="vertical-tabs__list">
+        <li>
+          <a id="my-tab-id" class="vertical-tabs__tab">
+            // Tab
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  Navigation tabs (no JS). Used to display a vertical navigation.
+
+  <div class="vertical-tabs">
+    <div class="vertical-tabs__tabs">
+      <nav aria-label="label for navigation">
+        <ul class="vertical-tabs__list">
+          <li>
+            <a id="my-tab-id" class="vertical-tabs__tab vertical-tabs__tab--is-active" aria-selected="true">
+              // Active Tab. Remove --is-active and aria-selected for standard tab
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="vertical-tabs__panel">
+      <a class="vertical-tabs__tab vertical-tabs__tab--mobile vertical-tabs__tab--is-active" aria-selected="true"">
+        // Duplicate Tab to show on smaller screens.
+        // Active Tab. Remove --is-active and aria-selected for standard tab
+      </a>
+      <div class="vertical-tabs__content">
+        // Tab content
+      </div>
+    </div>
+  </div>
+  </div>
+
+  Dynamic (JS) tabs, with associated tab panel:
+
+  <div class="vertical-tabs">
+    <div class="vertical-tabs__tabs">
+      <nav>
+        <ul class="vertical-tabs__list" role="tablist">
+          <li>
+            <a id="my-tab-id" class="vertical-tabs__tab vertical-tabs__tab--is-active" aria-selected="true" role="tab">
+              // Active Tab. Remove --is-active and aria-selected for standard tab
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="vertical-tabs__panel" role="tabpanel" aria-labelledby="my-tab-id my-mofile-tab-id">
+      <a id="my-mobile-tab-id" class="vertical-tabs__tab vertical-tabs__tab--mobile vertical-tabs__tab--is-active" aria-selected="true" role="tab">
+        // Duplicate Tab to show on smaller screens
+        // Active Tab. Remove --is-active and aria-selected for standard tab
+      </a>
+      <div class="vertical-tabs__content" tabindex="-1">
+        // Tab content
+      </div>
+    </div>
+  </div>
+*/
+
+.vertical-tabs {
+  @include clearfix;
+  @include grid-container;
+
+  margin: $spacing-unit 0;
+
+  @media only screen and (max-width: $tablet) {
+    margin: 0;
+  }
+
+  &__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__tabs {
+    grid-column: span 3;
+    padding-left: 1px;
+
+    @media only screen and (max-width: $tablet) {
+      display: none;
+    }
+  }
+
+  &__tab {
+    display: block;
+    padding: $half-spacing-unit;
+    cursor: pointer;
+    @include link-without-underline;
+
+    &:hover {
+      color: darken($primary-color, 10);
+    }
+
+    &:active,
+    &:focus {
+      outline: 1px solid $white;
+      box-shadow: 0 0 0 2px $primary-color;
+    }
+
+    &--mobile {
+      display: none;
+      @media only screen and (max-width: $tablet) {
+        display: block;
+        border-top: 1px solid $border-color;
+
+        &:last-of-type {
+          border-bottom: 1px solid $border-color;
+        }
+      }
+    }
+
+    &--no-top-border {
+      @media only screen and (max-width: $tablet) {
+        border-top: 0;
+      }
+    }
+
+    &--is-active,
+    &--is-active:hover {
+      background: $primary-color;
+      color: $white;
+      border-color: transparent;
+    }
+
+    &--condensed {
+      padding-top: $quarter-spacing-unit;
+      padding-bottom: $quarter-spacing-unit;
+    }
+
+    &--with-icon {
+      .fa,
+      .fas,
+      .fab,
+      .far {
+        font-size: 16px;
+        width: 20px;
+        text-align: center;
+        margin-right: 5px;
+      }
+
+      .fa-lg {
+        font-size: 18px;
+      }
+    }
+  }
+
+  &__panel {
+    grid-column: span 9;
+
+    @media only screen and (max-width: $tablet) {
+      grid-column: span 12;
+      width: 100%;
+    }
+  }
+
+  &__content {
+    margin-left: $spacing-unit;
+
+    &:focus {
+      outline: 1px solid $primary-color;
+      outline-offset: 10px;
+    }
+
+    @media only screen and (max-width: $tablet) {
+      margin: 25px 10px 10px;
+    }
+  }
+}

@@ -1,0 +1,6 @@
+#!/bin/bash
+set -ex
+
+export TZ="${TIMEZONE:-UTC}"
+# Actually run our tests.
+npm run test $@

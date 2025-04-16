@@ -1,0 +1,45 @@
+/*!
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+  A heading with a subtitle nested directly underneath:
+
+  <div class="heading-wsubtitle">
+    <h2 class="heading-wsubtitle__heading">Heading</h2>
+    <p class="heading-wsubtitle__subtitle">Subtitle</p>
+  </div>
+
+  Modifiers:
+   - in-content: restore heading spacing for instances where heading is not
+     at the top of the page
+*/
+
+.heading-wsubtitle {
+  &__heading {
+    padding-bottom: 5px;
+  }
+
+  &__subtitle {
+    font-size: 100%;
+    font-weight: normal;
+    margin-bottom: 15px;
+    padding-top: 0;
+  }
+
+  &--in-content {
+    .heading-wsubtitle__heading {
+      padding-top: 30px;
+    }
+  }
+}

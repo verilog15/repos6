@@ -1,0 +1,105 @@
+/*!
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+  A badge for highlighting important information.
+  Use for small strings, or numbers.
+
+  <span class="badge">Contributor</span>
+  or
+  <a class="badge">Sole owner</span>
+*/
+
+.badge {
+  font-size: 0.7em;
+  margin-left: 0.5em;
+  vertical-align: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid $primary-color;
+  background-color: $primary-color;
+  color: $white;
+  padding: 0 7px;
+  border-radius: 3px;
+  font-weight: 600;
+  white-space: nowrap;
+  @include link-without-underline;
+
+  .fa {
+    margin-right: 0.4em;
+  }
+
+  &:hover {
+    color: $white;
+  }
+
+  &:focus,
+  &:active {
+    border-color: $white;
+    outline: 1px solid $primary-color;
+  }
+
+  &--success {
+    background-color: $success-color;
+    border-color: $success-color;
+
+    &:focus,
+    &:active {
+      outline: 1px solid $success-color;
+    }
+  }
+
+  &--danger {
+    background-color: $danger-color;
+    border-color: $danger-color;
+
+    &:focus,
+    &:active {
+      outline: 1px solid $danger-color;
+    }
+  }
+
+  &--warning {
+    background-color: $warning-background-color;
+    border-color: $warning-background-color;
+    color: $warning-color;
+
+    &:hover {
+      color: $warning-color;
+    }
+
+    &:focus,
+    &:active {
+      outline: 1px solid $warning-color;
+    }
+  }
+
+  &--neutral {
+    background-color: $base-grey;
+    border-color: $base-grey;
+    color: darken($base-grey, 50);
+
+    &:hover {
+      color: darken($base-grey, 60);
+    }
+
+    &:focus,
+    &:active {
+      outline: 1px solid darken($base-grey, 50);
+    }
+  }
+}
+
+a.badge {
+  text-decoration: underline;
+}

@@ -1,0 +1,181 @@
+/*!
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+  A button:
+
+  <a class="button">Button</a>
+  <input type="submit" class="button">Button</a>
+  <button type="button" class="button">Button</button>
+
+  Modifiers:
+    - small: Makes button small.
+    - full-width: Makes button full width of parent container.
+    - primary: Makes button bright blue.
+    - danger: Makes button red.
+    - warning: Makes button brown.
+    - disabled: Styles for when the button cannot be clicked.
+    - switch-to-desktop: Switch to desktop button found in site footer.
+    - switch-to-mobile: Switch to mobile button found in site header.
+
+  Accessibility:
+    - All <button> elements should have a `type` defined
+*/
+
+.button {
+  position: relative;
+  font-weight: $bold-font-weight;
+  cursor: pointer;
+  padding: 8.5px $half-spacing-unit;
+  background-color: transparent;
+  color: lighten($text-color, 10);
+  border: 1px solid $accessible-border-color;
+  border-radius: 3px;
+  display: inline-block;
+  text-align: center;
+  @include link-without-underline;
+
+  i.fa {
+    position: relative;
+    top: 2px;
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    border-color: $primary-color;
+    color: darken($primary-color, 10);
+    z-index: index($z-index-scale, "active-button"); // Needed for button groups
+    outline: none;
+  }
+
+  &--small {
+    font-size: $small-font-size;
+    padding: 6px 8px;
+  }
+
+  &--full-width {
+    width: 100%;
+  }
+
+  &--primary {
+    border-color: $primary-color;
+    background-color: $primary-color;
+    color: $white;
+    z-index: index($z-index-scale, "primary-button"); // Needed for button groups
+
+    &:hover,
+    &:active,
+    &:focus {
+      border-color: darken($primary-color, 10);
+      background-color: darken($primary-color, 9);
+      text-decoration-color: transparentize($white, 0.8);
+      color: $white;
+    }
+
+    &:active,
+    &:focus {
+      border-color: $white;
+      @include link-focus-state($primary-color);
+    }
+  }
+
+  &--tertiary {
+    border-color: $light-grey;
+    background-color: $white;
+  }
+
+  &--danger {
+    border-color: $danger-color;
+    background-color: $danger-color;
+    color: $white;
+
+    &:focus,
+    &:hover,
+    &:active {
+      border-color: darken($danger-color, 5);
+      background-color: darken($danger-color, 4);
+      text-decoration-color: transparentize($white, 0.8);
+      color: $white;
+    }
+
+    &:active,
+    &:focus {
+      border-color: $white;
+      @include link-focus-state($danger-color);
+    }
+  }
+
+  &--warning {
+    border-color: $warning-color;
+    background-color: $warning-color;
+    color: $white;
+
+    &:focus,
+    &:hover,
+    &:active {
+      border-color: darken($warning-color, 5);
+      background-color: darken($warning-color, 4);
+      text-decoration-color: transparentize($white, 0.8);
+      color: $white;
+    }
+
+    &:active,
+    &:focus {
+      border-color: $white;
+      @include link-focus-state($warning-color);
+    }
+  }
+
+  &[disabled],
+  &--disabled {
+    cursor: not-allowed;
+    background-color: darken($background-color, 5%);
+    border-color: darken($background-color, 5%);
+    color: darken($background-color, 12%);
+    text-decoration: line-through;
+    pointer-events: auto;
+
+    &:focus,
+    &:hover,
+    &:active {
+      background-color: darken($background-color, 5%);
+      border-color: darken($background-color, 5%);
+      color: darken($background-color, 12%);
+      outline: none;
+    }
+  }
+
+  &--switch-to-desktop {
+    border-color: transparentize($white, 0.3);
+    color: $white;
+    margin: $spacing-unit auto 0;
+
+    &:hover,
+    &:focus,
+    &:active {
+      border-color: $white;
+      color: $white;
+    }
+  }
+
+  &--switch-to-mobile {
+    font-size: 500%;
+    padding: 40px;
+    height: auto;
+    margin: 25px;
+    border-radius: 25px;
+    width: calc(100% - 50px);
+  }
+}

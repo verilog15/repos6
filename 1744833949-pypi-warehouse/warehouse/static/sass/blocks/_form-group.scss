@@ -1,0 +1,135 @@
+/*!
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+  A form field, with label, input, and help text.
+
+  <div class="form-group">
+    <label class="form-group__label" for="myinput">
+      Label here
+      <span class="form-group__required"(required)</span>
+    </label>
+    <input class="form-group__field" id="myinput" />
+    <p class="form-group__text">When a field is not editable, you can use me instead</p>
+    <p class="form-group__help-text">Some help text here</p>
+  </div>
+*/
+
+.form-group {
+  margin-bottom: $half-spacing-unit;
+  max-width: 350px;
+
+  &__label {
+    display: block;
+    font-weight: bold;
+  }
+
+  &__label:not(:first-child) {
+    margin-top: 7px;
+  }
+
+  &__required {
+    font-size: $small-font-size;
+    font-weight: normal;
+  }
+
+  &__wide {
+    margin-bottom: $half-spacing-unit;
+    max-width: unset;
+  }
+
+:where(
+  input:not([type]),
+  select,
+  textarea,
+  [type="color"],
+  [type="date"],
+  [type="datetime"],
+  [type="datetime-local"],
+  [type="email"],
+  [type="month"],
+  [type="month"],
+  [type="number"],
+  [type="password"],
+  [type="search"],
+  [type="tel"],
+  [type="text"],
+  [type="time"],
+  [type="url"],
+  [type="week"]
+).form-group__field,
+  select.form-group__field {
+    display: block;
+    width: 350px;
+    margin-top: 4px;
+    max-width: 100%;
+  }
+
+  &__text {
+    font-size: $input-font-size;
+    padding: 4px 0 8px;
+  }
+
+  &__help-text {
+    padding: 0;
+    margin-top: 5px;
+    width: 350px;
+    max-width: 100%;
+    font-size: $small-font-size;
+
+    > code {
+      font-size: 0.7rem;
+    }
+  }
+
+  // For use with `stimulus-autocomplete`
+  &__results {
+    font-size: $input-font-size;
+    margin-left: 0;
+    padding: 4px 0 8px;
+
+    li {
+      background-color: $white;
+      border-bottom: 1px solid $border-color;
+      color: $text-color;
+      cursor: pointer;
+      list-style-type: none;
+
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: mix($white, $primary-color-light, 90%);
+        color: $primary-color-dark;
+      }
+
+      &:active,
+      &:focus {
+        outline: 1px solid $primary-color;
+        border-bottom-color: $primary-color;
+      }
+    }
+  }
+
+  // Specific cases for input validation using `pattern` attribute
+
+  /* stylelint-disable-next-line selector-id-pattern -- Form sets name */
+  input#totp_value:valid {
+    background-color: lighten($success-color, 40%);
+  }
+
+  /* stylelint-disable-next-line selector-id-pattern -- Form sets name */
+  input#totp_value:invalid {
+    background-color: lighten($danger-color, 40%);
+  }
+}

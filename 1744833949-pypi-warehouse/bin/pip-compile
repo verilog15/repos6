@@ -1,0 +1,6 @@
+#!/bin/bash
+set -ex
+
+COMMAND_ARGS="$@"
+
+pip-compile $COMMAND_ARGS

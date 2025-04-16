@@ -1,0 +1,37 @@
+/*!
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+  Z-INDEX SCALE
+
+  Add each new z-index item to this list, from lowest to highest.
+
+  You can then set your z-index by getting the index of this list:
+  z-index: index($z-index-scale, key);
+
+  See: https://www.smashingmagazine.com/2014/06/sassy-z-index-management-for-complex-layouts/
+*/
+
+$z-index-scale: "active-button",
+                "primary-button",
+                "tabs-border",
+                "history-line",
+                "history-node",
+                "callout-block",
+                "callout-block-border",
+                "dropdown",
+                "sticky-top",
+                "dark-overlay",
+                "filter-panel",
+                "skip-to-content";

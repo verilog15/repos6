@@ -1,0 +1,83 @@
+/*!
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+  An accordion that opens and closes
+  Initialise the component in either a closed or open state, and JS will do the rest:
+
+  Closed state:
+  <div class="accordion accordion--closed">
+    <a class="accordion__link -js-expander-trigger" aria-expanded="false" aria-controls="my-accordion-content">Trigger</a>
+    <div id="my-accordion-content" class="accordion__content" aria-hidden="true">
+      // Content to show and hide here
+    </div>
+  </div>
+
+  Open state:
+  <div class="accordion">
+    <a class="accordion__link -js-expander-trigger" aria-expanded="true" aria-controls="my-accordion-content">Trigger</a>
+    <div id="my-accordion-content" class="accordion__content" aria-hidden="false">
+      // Content to show and hide here
+    </div>
+  </div>
+*/
+
+.accordion {
+  margin-top: 10px;
+
+  &__link {
+    padding: 5px;
+    display: block;
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+    color: $primary-color;
+    @include link-without-underline;
+
+    &::before {
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      content: "\f139";
+      margin-right: $half-spacing-unit #{"/*rtl:5px*/"};
+    }
+
+    @media only screen and (max-width: $desktop) {
+      color: $white;
+      @include link-focus-state($white);
+    }
+  }
+
+  &__content {
+    padding: 0 0 5px;
+
+    a {
+      display: block;
+      margin-right: 10px;
+    }
+  }
+
+  &--closed {
+    .accordion__content {
+      display: none;
+    }
+
+    .accordion__link {
+      &::before {
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        content: "\f13a";
+      }
+    }
+  }
+}
